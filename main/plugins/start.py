@@ -6,7 +6,24 @@ from telethon import events, Button
 
 from ethon.mystarts import start_srb
     
-S = '/' + 's' + 't' + 'a' + 'r' + 't'
+S = "Send me Link of any message to clone it here, For private channels sent its invite link first and then send message link, which is needed to forward. \n if it is public channel,then invite link not needed. Just sent the message link.\n\n To report any issues contact @botthelp. \n\nUse /batch command to upload many files with a single link."
+
+@Drone.on(events.NewMessage(incoming=True, pattern="/start"))
+async def start(event):
+    await event.reply(f'{S}', 
+                      buttons=[
+                              [Button.inline("Set thumbnail", data="set"),
+                               Button.inline("Delete thumbnail", data="rem")]
+                              ])
+    try:
+        await Bot.start()
+        await userbot.start()
+        await idle()
+    except Exception as e:
+        if 'Client is already connected' in str(e):
+            pass
+        else:
+            return
 
 @Drone.on(events.callbackquery.CallbackQuery(data="set"))
 async def sett(event):    
