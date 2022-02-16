@@ -6,7 +6,7 @@ from telethon import events, Button
 
 from ethon.mystarts import start_srb
     
-S = "Send me Link of any message to clone it here, For private channels sent its invite link first and then send message link, which is needed to forward. \n if it is public channel,then invite link not needed. Just sent the message link.\n\n To report any issues contact @botthelp. \n\nUse /batch command to upload many files with a single link."
+S = "Send me Link of any message to clone it here, For private channels sent its invite link first and then send message link, which is needed to forward. \n if it is public channel,then invite link not needed. Just sent the message link.\n\n To report any issues contact @botthelp. \n\nUse /batch command to upload many files with a single link. \nCredits: Mahesh chouhan"
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -32,7 +32,7 @@ async def sett(event):
     msg = await button.get_reply_message() 
     await event.delete()
     async with Drone.conversation(event.chat_id) as conv: 
-        xx = await conv.send_message("Send me any image for thumbnail as a `reply` to this message.")
+        xx = await conv.send_message("Send me any image for thumbnail as a `reply` to this message.", buttons=Button.force_reply()) 
         x = await conv.get_reply()
         if not x.media:
             xx.edit("No media found.")
@@ -59,8 +59,5 @@ async def remt(event):
     except Exception:
         await event.edit("No thumbnail saved.")                        
   
-@Drone.on(events.NewMessage(incoming=True, pattern=f"{S}"))
-async def start(event):
-    text = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\n**SUPPORT:** @TeamDrone"
-    await start_srb(event, text)
+
     
