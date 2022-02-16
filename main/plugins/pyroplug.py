@@ -26,7 +26,7 @@ async def check(userbot, client, link):
         except ValueError:
             return False, "**Invalid Link!**"
         except Exception:
-            return False, "Have you joined the channel?"
+            return False, "Have you send me the invite link?"
     else:
         try:
             chat = str(link.split("/")[-2])
@@ -115,9 +115,9 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
         except Exception as e:
             print(e)
             if 'CHANNEL' in str(e).split("_") and 'INVALID' in str(e).split("_"):
-                await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
+                await client.edit_message_text(sender, edit_id, "Have you gave me channel invite link?")
                 return 
-            await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`. If it is a private channel sent me its invite link!')
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
